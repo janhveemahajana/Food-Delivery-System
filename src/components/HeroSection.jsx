@@ -1,7 +1,7 @@
 
 const HeroSection = () => {
     return (
-        <h1>WElcome to home's hero section</h1>
+        <h1>Welcome to home's hero section</h1>
     )
 }
 
