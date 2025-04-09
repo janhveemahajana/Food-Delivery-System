@@ -1,45 +1,50 @@
 import { useEffect, useState } from "react";
-import { validateToken } from "../../../services/authService";  // Import validateToken function
+import { validateToken } from "../../../services/authService"; // Import validateToken function
 
 const OwnerDashboard = () => {
   const [loading, setLoading] = useState(true);
-  const [valid, setValid] = useState(false);  // To store token validity
-  const [error, setError] = useState("");  // Error state
+  const [valid, setValid] = useState(false); // To store token validity
+  const [error, setError] = useState(""); // Error state
+
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkToken = async () => {
       try {
-        await validateToken();  // Call validateToken API
-        setValid(true);  // If token is valid, set valid state to true
+        await validateToken();
+        setValid(true);
+
+        // Get user from localStorage
+        const userData = JSON.parse(localStorage.getItem("userInfo"));
+        setUser(userData);
       } catch (error) {
         setError("Invalid or expired token. Please log in again.");
         setValid(false);
       } finally {
-        setLoading(false);  // Stop loading once check is complete
+        setLoading(false);
       }
     };
 
-    checkToken();  // Validate token on page load
+    checkToken();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;  // Show loading state until validation is done
+    return <div>Loading...</div>; // Show loading state until validation is done
   }
 
   if (error) {
-    return <div>{error}</div>;  // Show error message if token is invalid
+    return <div>{error}</div>; // Show error message if token is invalid
   }
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">Welcome to Owner Dashboard </h1>
-      <p className="mt-4 text-lg text-gray-700">
-        Hello,{" "}
-        <span className="font-semibold text-green-600">
-          {localStorage.getItem("userInfo")?.email}
-        </span>{" "}
-        👋
-      </p>
+      <h1 className="text-2xl font-bold">Welcome to Owner Dashboard</h1>
+      {user && (
+        <p className="mt-4 text-lg text-gray-700">
+          Hello,{" "}
+          <span className="font-semibold text-green-600">{user.email}</span> 👋
+        </p>
+      )}
     </div>
   );
 };

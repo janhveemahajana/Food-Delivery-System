@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import "./RegisterLogin.css";
 
 const RegisterForm = () => {
@@ -8,7 +9,7 @@ const RegisterForm = () => {
     name: "",
     email: "",
     password: "",
-    role: "CUSTOMER", // Default role
+    roles: "CUSTOMER", // Default role
   });
 
   const [loading, setLoading] = useState(false);
@@ -25,12 +26,15 @@ const RegisterForm = () => {
     setError("");
 
     try {
-      const response = await axios.post("https://user-service-6eg1.onrender.com/auth/register", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        roles: [formData.role], // API expects roles as an array
-      });
+      const response = await axios.post(
+        "https://user-service-6eg1.onrender.com/auth/register",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          roles: [formData.roles], // API expects roles as an array
+        }
+      );
 
       console.log("Registration successful:", response.data);
       alert("Registration successful! Please log in.");
@@ -91,7 +95,7 @@ const RegisterForm = () => {
             onChange={handleChange}
             className="w-full p-3 mt-2 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
           >
-            <option value="USER">User</option>
+            <option value="CUSTOMER">Customer</option>
             <option value="OWNER">Restaurant Owner</option>
             <option value="DELIVERY">Delivery Boy</option>
           </select>
@@ -125,6 +129,17 @@ const RegisterForm = () => {
               Login
             </span>
           </p>
+        </div>
+        <div className="mt-6 flex justify-center gap-4">
+          <button className="w-10 h-10 p-3 flex items-center bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200">
+            <FaFacebook />
+          </button>
+          <button className="w-10 h-10 p-3 flex items-center bg-red-600 text-white rounded-full hover:bg-red-700 transition duration-200">
+            <FaGoogle />
+          </button>
+          <button className="w-10 h-10 p-3 flex items-center bg-blue-400 text-white rounded-full hover:bg-blue-500 transition duration-200">
+            <FaTwitter />
+          </button>
         </div>
       </div>
     </div>

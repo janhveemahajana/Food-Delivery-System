@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import LoginForm from "./components/Registration&Login/LoginForm";
 import RegisterForm from "./components/Registration&Login/RegisterForm";
 import UserDashboard from "./pages/Dashboards/UserDashBoard/UserDashboard";
 import OwnerDashboard from "./pages/Dashboards/OwnerDashboard/OwnerDashboard";
 import DeliveryDashboard from "./pages/Dashboards/DeliveryDashboard/DeliveryDashboard";
+import LoginForm from "./components/Registration&Login/LoginForm";
 // import Navbar from "./components/Navbar";
 
 function App() {
