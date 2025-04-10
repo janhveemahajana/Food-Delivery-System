@@ -26,7 +26,11 @@ const LoginTemplate = ({ role, redirectTo }) => {
         }
       );
 
-      const userRole = response.data.user.roles?.[0];
+      // decode token to get role
+      const token = response.data.token;
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const userRole = payload.roles?.[0];
+
       if (userRole !== role) {
         setError("Invalid role for this login page.");
         setLoading(false);
