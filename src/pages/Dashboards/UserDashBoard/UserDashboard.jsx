@@ -37,6 +37,8 @@ const UserDashboard = () => {
   }
 
   return (
+    <>
+    
     <div className="p-6">
       <h1 className="text-2xl font-bold">Welcome to User Dashboard</h1>
       {user && (
@@ -46,6 +48,7 @@ const UserDashboard = () => {
         </p>
       )}
     </div>
+    </>
   );
 };
 

@@ -38,7 +38,13 @@ const RegisterForm = () => {
 
       console.log("Registration successful:", response.data);
       alert("Registration successful! Please log in.");
-      navigate("/login");
+      if (formData.roles === "CUSTOMER") {
+        navigate("/login-customer");
+      } else if (formData.roles === "OWNER") {
+        navigate("/login-owner");
+      } else if (formData.roles === "DELIVERY") {
+        navigate("/login-delivery");
+      }
     } catch (err) {
       setError(
         err.response?.data?.message || "Registration failed. Try again."
@@ -120,7 +126,7 @@ const RegisterForm = () => {
           >
             Back to Home
           </button>
-          <p className="mt-2 text-gray-600">
+          {/* <p className="mt-2 text-gray-600">
             Already have an account?{" "}
             <span
               onClick={() => navigate("/login")}
@@ -128,7 +134,7 @@ const RegisterForm = () => {
             >
               Login
             </span>
-          </p>
+          </p> */}
         </div>
         <div className="mt-6 flex justify-center gap-4">
           <button className="w-10 h-10 p-3 flex items-center bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200">

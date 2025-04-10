@@ -40,7 +40,7 @@ const LoginForm = () => {
       const role = formData.role; // use selected role for redirection
 
       if (role === "CUSTOMER") {
-        navigate("/user-dashboard");
+        navigate("/user-dashboardpage");
       } else if (role === "OWNER") {
         navigate("/owner-dashboard");
       } else if (role === "DELIVERY") {
